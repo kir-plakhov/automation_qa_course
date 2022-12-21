@@ -1,5 +1,8 @@
 import time
 import random
+
+from selenium.webdriver.common.by import By
+
 from generator.generator import generated_person
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
     WebTablePageLocators
@@ -81,7 +84,7 @@ class WebTablePage(BasePage):
     locators = WebTablePageLocators()
 
     def add_new_person(self):
-        count = random.randint(1, 3)
+        count = 1
         while count != 0:
             person_info = next(generated_person())
             firstname = person_info.firstname
@@ -115,3 +118,33 @@ class WebTablePage(BasePage):
         delete_button = self.element_is_present(self.locators.DELETE_BUTTON)
         row = delete_button.find_element(*self.locators.ROW_PARENT)
         return row.text.splitlines()
+
+    def update_person_info(self):
+        person_info = next(generated_person())
+        age = person_info.age
+        self.element_is_visible(self.locators.UPDATE_BUTTON).click()
+        self.element_is_visible(self.locators.AGE_INPUT).clear()
+        self.element_is_visible(self.locators.AGE_INPUT).send_keys(age)
+        self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+        return str(age)
+
+    def delete_person(self):
+        self.element_is_visible(self.locators.DELETE_BUTTON).click()
+
+    def check_deleted(self):
+        return self.element_is_present(self.locators.NO_ROWS_FOUND).text
+
+    def select_up_to_some_rows(self):
+        count = [5, 10, 20, 25, 50, 100]
+        data = []
+        for x in count:
+            rows_amount_list = self.element_is_visible(self.locators.ROW_AMOUNT_LIST)
+            self.go_to_element(rows_amount_list)
+            rows_amount_list.click()
+            self.element_is_visible((By.CSS_SELECTOR, f"option[value='{x}']")).click()
+            data.append(self.check_rows_amount())
+        return data
+
+    def check_rows_amount(self):
+        list_rows = self.elements_are_present(self.locators.FULL_PERSON_LIST)
+        return len(list_rows)
