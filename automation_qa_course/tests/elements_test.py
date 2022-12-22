@@ -1,6 +1,6 @@
 import random
 import time
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage
 
 
 class TestElements:
@@ -71,7 +71,6 @@ class TestElements:
             web_table_page = WebTablePage(driver, 'https://demoqa.com/webtables')
             web_table_page.open()
             email = web_table_page.add_new_person()[3]
-            time.sleep(1)
             web_table_page.search_some_person(email)
             web_table_page.delete_person()
             text = web_table_page.check_deleted()
@@ -82,3 +81,14 @@ class TestElements:
             web_table_page.open()
             count = web_table_page.select_up_to_some_rows()
             assert count == [5, 10, 20, 25, 50, 100], "Rows amount in the table hasn't been changed correct"
+
+    class TestButtons:
+        def test_different_clicks_on_buttons(self, driver):
+            button_page = ButtonsPage(driver, 'https://demoqa.com/buttons')
+            button_page.open()
+            double = button_page.click_on_any_button('double')
+            right = button_page.click_on_any_button('right')
+            me = button_page.click_on_any_button('me')
+            assert double == "You have done a double click", "The button 'double' has not been clicked"
+            assert right == "You have done a right click", "The button 'right' has not been clicked"
+            assert me == "You have done a dynamic click", "The button 'me' has not been clicked"
