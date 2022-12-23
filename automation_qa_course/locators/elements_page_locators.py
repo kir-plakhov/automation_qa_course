@@ -65,3 +65,7 @@ class ButtonsPageLocators:
     SUCCESS_RIGHT_CLICK = (By.CSS_SELECTOR, "p[id='rightClickMessage']")
     SUCCESS_CLICK_ME_CLICK = (By.CSS_SELECTOR, "p[id='dynamicClickMessage']")
 
+
+class LinksPageLocators:
+    SIMPLE_LINK = (By.XPATH, "//*[@id='simpleLink']")
+    BAD_REQUEST = (By.XPATH, "//*[@id='bad-request']")
