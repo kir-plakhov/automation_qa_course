@@ -9,7 +9,7 @@ class BasePage:
         self.url = url
 
     def open(self):
-        self.driver.implicitly_wait(6)
+        self.driver.implicitly_wait(5)
         self.driver.get(self.url)
 
     def element_is_visible(self, locator, timeout=5):

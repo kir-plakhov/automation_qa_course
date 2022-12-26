@@ -3,7 +3,6 @@ import random
 from data.data import Person
 from faker import Faker
 
-
 faker_ru = Faker('ru_RU')
 
 
@@ -15,10 +14,11 @@ def generated_person():
         age=random.randint(18, 70),
         department=faker_ru.job(),
         salary=random.randint(400, 10000),
-        email= faker_ru.email(),
-        current_address= faker_ru.address(),
+        email=faker_ru.email(),
+        current_address=faker_ru.address(),
         permanent_address=faker_ru.address(),
     )
+
 
 def generated_file():
     path = rf'D:\Study\first_project\automation_qa_course\filetest{random.randint(0, 999)}.txt'
