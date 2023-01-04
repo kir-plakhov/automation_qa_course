@@ -9,7 +9,7 @@ class BasePage:
         self.url = url
 
     def open(self):
-        self.driver.implicitly_wait(5)
+        self.driver.implicitly_wait(10)
         self.driver.get(self.url)
 
     def element_is_visible(self, locator, timeout=5):
@@ -43,3 +43,9 @@ class BasePage:
         action.context_click(element)
         action.perform()
 
+    def scroll_to_the_bottom(self):
+        self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
+
+    def remove_footer(self):
+        self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
+        self.driver.execute_script("document.getElementsById('close-fixedban').remove();")
