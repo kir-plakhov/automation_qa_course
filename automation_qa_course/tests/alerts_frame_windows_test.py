@@ -1,7 +1,7 @@
 import random
 import time
 
-from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage, FramesPage
+from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage, FramesPage, NestedFramesPage
 
 
 class TestAlertsFrameWindows:
@@ -54,3 +54,12 @@ class TestAlertsFrameWindows:
             result_frame_2 = frames_page.check_frame('frame2')
             assert result_frame_1 == ['This is a sample page', '500px', '350px']
             assert result_frame_2 == ['This is a sample page', '100px', '100px']
+
+    class TestNestedFramesPage:
+
+        def test_nested_frames(self, driver):
+            nested_frames_page = NestedFramesPage(driver, 'https://demoqa.com/nestedframes')
+            nested_frames_page.open()
+            parent_text, child_text = nested_frames_page.check_nested_frame()
+            assert parent_text == 'Parent frame'
+            assert child_text == 'Child Iframe'
