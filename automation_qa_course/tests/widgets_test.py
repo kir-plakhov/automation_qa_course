@@ -1,6 +1,7 @@
 import time
 
-from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage, \
+    ToolTipsPage
 
 
 class TestWidgets:
@@ -86,3 +87,24 @@ class TestWidgets:
         def test_tool_tips(self, driver):
             tool_tips_page = ToolTipsPage(driver, 'https://demoqa.com/tool-tips')
             tool_tips_page.open()
+            button_text = tool_tips_page.check_button_tool_tips()
+            assert button_text == 'You hovered over the Button'
+
+        # This test case periodically crashes
+        def test_input_tool_tips(self, driver):
+            tool_tips_page = ToolTipsPage(driver, 'https://demoqa.com/tool-tips')
+            tool_tips_page.open()
+            input_text = tool_tips_page.check_input_tool_tips()
+            assert input_text == 'You hovered over the text field'
+
+        def test_contrary_tool_tips(self, driver):
+            tool_tips_page = ToolTipsPage(driver, 'https://demoqa.com/tool-tips')
+            tool_tips_page.open()
+            contrary_text = tool_tips_page.check_contrary_tool_tips()
+            assert contrary_text == 'You hovered over the Contrary'
+
+        def test_second_link_tool_tips(self, driver):
+            tool_tips_page = ToolTipsPage(driver, 'https://demoqa.com/tool-tips')
+            tool_tips_page.open()
+            second_link_text = tool_tips_page.check_second_link_tool_tips()
+            assert second_link_text == 'You hovered over the 1.10.32'

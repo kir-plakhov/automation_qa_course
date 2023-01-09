@@ -7,7 +7,7 @@ from selenium.webdriver.support.select import Select
 
 from generator.generator import generated_color, generated_date
 from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators
 from pages.base_page import BasePage
 
 
@@ -170,3 +170,27 @@ class TabsPage(BasePage):
 
 class ToolTipsPage(BasePage):
     locators = ToolTipsPageLocators()
+
+    def get_tool_tip_text(self, hover_elem, wait_elem):
+        element = self.element_is_present(hover_elem)
+        self.action_move_to_element(element)
+        self.element_is_visible(wait_elem)
+        tool_tip_text = self.element_is_visible(self.locators.TOOL_TIPS_INNERS)
+        text = tool_tip_text.text
+        return text
+
+    def check_button_tool_tips(self):
+        button_tool_tip_text = self.get_tool_tip_text(self.locators.BUTTON, self.locators.BUTTON_TOOL_TIP)
+        return button_tool_tip_text
+
+    def check_input_tool_tips(self):
+        input_tool_tip_text = self.get_tool_tip_text(self.locators.FIELD, self.locators.FIELD_TOOL_TIP)
+        return input_tool_tip_text
+
+    def check_contrary_tool_tips(self):
+        contrary_tool_tip_text = self.get_tool_tip_text(self.locators.CONTRARY_LINK, self.locators.CONTRARY_LINK)
+        return contrary_tool_tip_text
+
+    def check_second_link_tool_tips(self):
+        second_link_tool_tip_text = self.get_tool_tip_text(self.locators.SECOND_LINK, self.locators.SECOND_LINK_TOOL_TIP)
+        return second_link_tool_tip_text

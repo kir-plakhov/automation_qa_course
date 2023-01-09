@@ -54,4 +54,16 @@ class TabsPageLocators:
 
 
 class ToolTipsPageLocators:
-    
+    BUTTON = (By.CSS_SELECTOR, 'button[id="toolTipButton"]')
+    BUTTON_TOOL_TIP = (By.CSS_SELECTOR, 'button[aria-describedby="buttonToolTip"]')
+
+    FIELD = (By.XPATH, '//*[@id="toolTipTextField"]')
+    FIELD_TOOL_TIP = (By.CSS_SELECTOR, 'input[aria-describedby="textFieldToolTip"]')
+
+    CONTRARY_LINK = (By.XPATH, '//*[.="Contrary"]')
+    CONTRARY_LINK_TOOL_TIP = (By.CSS_SELECTOR, 'a[aria-describedby="contraryTexToolTip"]')
+
+    SECOND_LINK = (By.XPATH, '//*[.="1.10.32"]')
+    SECOND_LINK_TOOL_TIP = (By.CSS_SELECTOR, 'a[aria-describedby="sectionToolTip"]')
+
+    TOOL_TIPS_INNERS = (By.CSS_SELECTOR, 'div[class="tooltip-inner"]')
