@@ -7,7 +7,7 @@ from selenium.webdriver.support.select import Select
 
 from generator.generator import generated_color, generated_date
 from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators, MenuPageLocators
 from pages.base_page import BasePage
 
 
@@ -194,3 +194,15 @@ class ToolTipsPage(BasePage):
     def check_second_link_tool_tips(self):
         second_link_tool_tip_text = self.get_tool_tip_text(self.locators.SECOND_LINK, self.locators.SECOND_LINK_TOOL_TIP)
         return second_link_tool_tip_text
+
+
+class MenuPage(BasePage):
+    locators = MenuPageLocators()
+
+    def check_menu(self):
+        menu_item_list = self.elements_are_present(self.locators.MENU_ITEM_LIST)
+        data = []
+        for item in menu_item_list:
+            self.action_move_to_element(item)
+            data.append(item.text)
+        return data
