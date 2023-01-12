@@ -63,7 +63,7 @@ class ResizablePage(BasePage):
 
     def get_px_from_width_height(self, size_value):
         width = size_value.split(';')[0].split(':')[1].replace(' ', '')
-        height = size_value.split(';')[0].split(':')[1].replace(' ', '')
+        height = size_value.split(';')[1].split(':')[1].replace(' ', '')
         return width, height
 
     def get_max_min_size(self, element):
@@ -72,7 +72,7 @@ class ResizablePage(BasePage):
         return size_value
 
     def change_size_first_box(self):
-        self.action_drag_and_drop_by_offset(self.element_is_present(self.locators.FIRST_BOX_HANDLER), 400, 100)
+        self.action_drag_and_drop_by_offset(self.element_is_present(self.locators.FIRST_BOX_HANDLER), 400, 200)
         max_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.FIRST_BOX))
         self.action_drag_and_drop_by_offset(self.element_is_present(self.locators.FIRST_BOX_HANDLER), -500, -300)
         min_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.FIRST_BOX))
