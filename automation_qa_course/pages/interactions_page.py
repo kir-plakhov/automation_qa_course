@@ -6,7 +6,7 @@ from selenium.webdriver import Keys
 from selenium.webdriver.support.select import Select
 
 from generator.generator import generated_color, generated_date
-from locators.interactions_page_locators import SortablePageLocators, SelectablePageLocators
+from locators.interactions_page_locators import SortablePageLocators, SelectablePageLocators, ResizablePageLocators
 from pages.base_page import BasePage
 
 
@@ -56,3 +56,33 @@ class SelectablePage(BasePage):
         self.click_selectable_item(self.locators.GRID_ITEM)
         active_element = self.element_is_visible(self.locators.GRID_ITEM_ACTIVE)
         return active_element.text
+
+
+class ResizablePage(BasePage):
+    locators = ResizablePageLocators()
+
+    def get_px_from_width_height(self, size_value):
+        width = size_value.split(';')[0].split(':')[1].replace(' ', '')
+        height = size_value.split(';')[0].split(':')[1].replace(' ', '')
+        return width, height
+
+    def get_max_min_size(self, element):
+        size = self.element_is_visible(element)
+        size_value = size.get_attribute('style')
+        return size_value
+
+    def change_size_first_box(self):
+        self.action_drag_and_drop_by_offset(self.element_is_present(self.locators.FIRST_BOX_HANDLER), 400, 100)
+        max_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.FIRST_BOX))
+        self.action_drag_and_drop_by_offset(self.element_is_present(self.locators.FIRST_BOX_HANDLER), -500, -300)
+        min_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.FIRST_BOX))
+        return max_size, min_size
+
+    def change_size_second_box(self):
+        self.scroll_to_the_bottom()
+        self.action_drag_and_drop_by_offset(self.element_is_present(self.locators.SECOND_BOX_HANDLER), random.randint(1, 300), random.randint(1,300))
+        max_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.SECOND_BOX))
+        self.scroll_to_the_bottom()
+        self.action_drag_and_drop_by_offset(self.element_is_present(self.locators.SECOND_BOX_HANDLER), random.randint(-200, -1), random.randint(-200, -1))
+        min_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.SECOND_BOX))
+        return max_size, min_size

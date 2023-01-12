@@ -18,3 +18,13 @@ class SelectablePageLocators:
     GRID_ITEM = (By.CSS_SELECTOR, 'div[id="gridContainer"] li[class="list-group-item list-group-item-action"]')
     GRID_ITEM_ACTIVE = (By.CSS_SELECTOR, 'div[id="gridContainer"] li[class="list-group-item active '
                                          'list-group-item-action"]')
+
+
+class ResizablePageLocators:
+    FIRST_BOX = (By.CSS_SELECTOR, 'div[id="resizableBoxWithRestriction"]')
+    SECOND_BOX = (By.CSS_SELECTOR, 'div[id="resizable"]')
+    FIRST_BOX_HANDLER = (By.CSS_SELECTOR, 'div[class="constraint-area"] span[class="react-resizable-handle '
+                                          'react-resizable-handle-se"]')
+    SECOND_BOX_HANDLER = (By.CSS_SELECTOR, 'div[id="resizable"] span[class="react-resizable-handle '
+                                           'react-resizable-handle-se"]')
+
