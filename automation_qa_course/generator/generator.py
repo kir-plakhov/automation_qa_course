@@ -1,6 +1,6 @@
 import random
 
-from data.data import Person, Color, Date
+from automation_qa_course.automation_qa_course.data.data import Person, Color, Date
 from faker import Faker
 
 faker_ru = Faker('ru_RU')
@@ -34,6 +34,7 @@ def generated_color():
     yield Color(
         color_name=["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"]
     )
+
 
 def generated_date():
     yield Date(
