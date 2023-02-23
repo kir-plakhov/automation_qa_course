@@ -1,6 +1,6 @@
 import random
 
-from automation_qa_course.automation_qa_course.data.data import Person, Color, Date
+from automation_qa_course.data.data import Person, Color, Date
 from faker import Faker
 
 faker_ru = Faker('ru_RU')

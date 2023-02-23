@@ -1,8 +1,8 @@
 import time
 
-from locators.alerts_frame_windows_page_locators import BrowserWindowsPageLocators, AlertsPageLocators, \
+from automation_qa_course.locators.alerts_frame_windows_page_locators import BrowserWindowsPageLocators, AlertsPageLocators, \
     FramesPageLocators, NestedFramesPageLocators, ModalDialogsPageLocators
-from pages.base_page import BasePage
+from automation_qa_course.pages.base_page import BasePage
 
 
 class BrowserWindowsPage(BasePage):

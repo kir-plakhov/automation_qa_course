@@ -1,8 +1,8 @@
 import time
 
-from automation_qa_course.automation_qa_course.pages.interactions_page import SortablePage, SelectablePage, ResizablePage, DroppablePage
+from automation_qa_course.pages.interactions_page import SortablePage, SelectablePage, ResizablePage, DroppablePage
 
-from automation_qa_course.automation_qa_course.pages.interactions_page import DraggablePage
+from automation_qa_course.pages.interactions_page import DraggablePage
 
 
 class TestInteractions:
@@ -12,13 +12,13 @@ class TestInteractions:
             sortable_page = SortablePage(driver, 'https://demoqa.com/sortable')
             sortable_page.open()
             before, after = sortable_page.change_list_order()
-            assert before != after
+            assert before != after, "The order of elements has not been changed"
 
         def test_sortable_grid(self, driver):
             sortable_page = SortablePage(driver, 'https://demoqa.com/sortable')
             sortable_page.open()
             before, after = sortable_page.change_grid_order()
-            assert before != after
+            assert before != after, "The order of elements has not been changed"
 
     class TestSelectablePage:
 
@@ -27,8 +27,8 @@ class TestInteractions:
             selectable_page.open()
             item_list = selectable_page.select_list_item()
             grid_list = selectable_page.select_grid_item()
-            assert len(item_list) > 0
-            assert len(grid_list) > 0
+            assert len(item_list) > 0, "no elements were selected"
+            assert len(grid_list) > 0, "no elements were selected"
 
     class TestResizablePage:
 
@@ -48,31 +48,31 @@ class TestInteractions:
             droppable_page = DroppablePage(driver, 'https://demoqa.com/droppable')
             droppable_page.open()
             text = droppable_page.drop_simple()
-            assert text == 'Dropped!'
+            assert text == 'Dropped!', "the elements has not been dropped"
 
         def test_accept(self, driver):
             droppable_page = DroppablePage(driver, 'https://demoqa.com/droppable')
             droppable_page.open()
             not_accept, accept = droppable_page.drop_acceptable()
-            assert not_accept == 'Drop here'
-            assert accept == 'Dropped!'
+            assert not_accept == 'Drop here', "the dropped element has been accepted"
+            assert accept == 'Dropped!', "the dropped element has not been accepted"
 
-        def test_prevent_propogation(self, driver):
+        def test_prevent_propagation(self, driver):
             droppable_page = DroppablePage(driver, 'https://demoqa.com/droppable')
             droppable_page.open()
             not_greedy, not_greedy_inner, greedy, greedy_inner = droppable_page.drop_prevent_propagation()
-            assert not_greedy == 'Dropped!'
-            assert not_greedy_inner == 'Dropped!'
-            assert greedy == 'Outer droppable'
-            assert greedy_inner == 'Dropped!'
+            assert not_greedy == 'Dropped!', "the elements texts has not been changed"
+            assert not_greedy_inner == 'Dropped!', "the elements texts has not been changed"
+            assert greedy == 'Outer droppable', "the elements texts has not been changed"
+            assert greedy_inner == 'Dropped!', "the elements texts has not been changed"
 
         def test_revert_draggable(self, driver):
             droppable_page = DroppablePage(driver, 'https://demoqa.com/droppable')
             droppable_page.open()
             after_drop, after_revert = droppable_page.drop_will_revert_draggable()
             after_drop_second, after_revert_second = droppable_page.drop_not_revert_draggable()
-            assert after_drop != after_revert
-            assert after_drop_second == after_revert_second
+            assert after_drop != after_revert, 'the elements has not reverted'
+            assert after_drop_second == after_revert_second, 'the elements has  reverted'
 
     class TestDraggable:
 
@@ -80,7 +80,7 @@ class TestInteractions:
             draggable_page = DraggablePage(driver, 'https://demoqa.com/dragabble')
             draggable_page.open()
             before, after = draggable_page.simple_drag_box()
-            assert before != after
+            assert before != after, "the position of the box has not been changed"
 
         def test_axis_restricted_draggable(self, driver):
             draggable_page = DraggablePage(driver, 'https://demoqa.com/dragabble')

@@ -17,7 +17,7 @@ from pages.base_page import BasePage
 class TextBoxPage(BasePage):
     locators = TextBoxPageLocators()
 
-    def fill_all_fields(self, ):
+    def fill_all_fields(self):
         person_info = next(generated_person())
         full_name = person_info.full_name
         email = person_info.email

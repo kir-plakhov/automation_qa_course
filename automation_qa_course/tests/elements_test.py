@@ -1,7 +1,6 @@
 import random
-import time
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, LinksPage, \
-    UploadAndDownloadPage, DynamicPropertiesPage
+from automation_qa_course.pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, \
+    ButtonsPage, LinksPage, UploadAndDownloadPage, DynamicPropertiesPage
 
 
 class TestElements:
@@ -13,7 +12,7 @@ class TestElements:
             input_data = text_box_page.fill_all_fields()
             output_data = text_box_page.check_filled_form()
 
-            assert input_data == output_data
+            assert input_data == output_data, "Input data does not match"
 
     class TestCheckBox:
 
@@ -25,7 +24,7 @@ class TestElements:
             input_checkbox = check_box_page.get_checked_checkboxes()
             output_result = check_box_page.get_output_result()
 
-            assert input_checkbox == output_result
+            assert input_checkbox == output_result, 'checkboxes have not been selected'
 
     class TestRadioButton:
 
@@ -38,8 +37,8 @@ class TestElements:
             output_impressive = radio_button_page.get_output_result()
             radio_button_page.click_on_the_radio_button('no')
             output_no = radio_button_page.get_output_result()
-            assert output_yes == 'Yes'
-            assert output_impressive == 'Impressive'
+            assert output_yes == 'Yes', "'Yes' have not been selected"
+            assert output_impressive == 'Impressive', "'Impressive' have not been selected"
             assert output_no == 'No', '"No" has not been selected'
 
     class TestWebTable:
@@ -49,7 +48,7 @@ class TestElements:
             web_table_page.open()
             new_person = web_table_page.add_new_person()
             table_result = web_table_page.check_new_added_person()
-            assert new_person in table_result
+            assert new_person in table_result, "New person was not add into the table"
 
         def test_web_table_search_person(self, driver):
             web_table_page = WebTablePage(driver, 'https://demoqa.com/webtables')
